@@ -1,13 +1,13 @@
 <?php
 
-namespace Illuminate\Tests\Integration\Database\Postgres;
+namespace Illuminate\Tests\Integration\Database;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class PostgresCacheStoreTest extends PostgresTestCase
+class DatabaseCacheStoreTest extends DatabaseTestCase
 {
     protected function defineDatabaseMigrationsAfterDatabaseRefreshed()
     {
