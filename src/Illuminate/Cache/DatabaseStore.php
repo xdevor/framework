@@ -8,6 +8,7 @@ use Illuminate\Contracts\Cache\Store;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\PostgresConnection;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\SqlServerConnection;
 use Illuminate\Support\InteractsWithTime;
 use Illuminate\Support\Str;
 
@@ -157,7 +158,8 @@ class DatabaseStore implements LockProvider, Store
             return false;
         }
 
-        if (method_exists($this->table(), 'insertOrIgnore')) {
+        $notSupportInsertOrIgnoreConnections = [SqlServerConnection::class];
+        if (! in_array(get_class($this->getConnection()), $notSupportInsertOrIgnoreConnections)) {
             return $this->table()->insertOrIgnore(compact('key', 'value', 'expiration')) > 0;
         }
 
